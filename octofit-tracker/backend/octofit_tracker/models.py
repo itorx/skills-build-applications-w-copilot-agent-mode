@@ -3,6 +3,16 @@ from djongo import models
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='octofit_users',
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='octofit_users',
+        blank=True
+    )
     REQUIRED_FIELDS = ['email']
 
 class Team(models.Model):

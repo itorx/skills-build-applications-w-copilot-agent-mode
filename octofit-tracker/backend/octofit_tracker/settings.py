@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-^e37b8)@u*a+d9op1qy60_&x41^09on@c5**gxk12zr0$k==ff
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+import os
+CODESPACE_NAME = os.environ.get('CODESPACE_NAME', '')
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if CODESPACE_NAME:
+    ALLOWED_HOSTS.append(f'{CODESPACE_NAME}-8000.app.github.dev')
 
 
 # Application definition
@@ -124,9 +128,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Use custom user model
+AUTH_USER_MODEL = 'octofit_tracker.User'
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True
